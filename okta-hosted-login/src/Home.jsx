@@ -68,9 +68,9 @@ const Home = () => {
         && (
         <div>
           <p id="welcome">
-            Welcome, &nbsp;
+            Administrator: ;
             {userInfo.name}
-            !
+            
           </p>
           <p>
             Welcome to the DCJ ID Page.
@@ -82,16 +82,12 @@ const Home = () => {
           </p>
           <h3>Search for user</h3>
           <p>Please enter a users email address in the search box</p>
-          <p>Then click the push okta verify button to push an okta verify challenge to a users phone  To see access token authentication in action, please download one of these resource server examples:</p>
+          <p>Then click the push okta verify button to push an okta verify challenge to a users phone :</p>
           <ul>
-            {resourceServerExamples.map((example) => <li key={example.url}><a href={example.url}>{example.label}</a></li>)}
+            
           </ul>
           <p>
-            Once you have downloaded and started the example resource server, you can visit the
-            {' '}
-            <a href="/messages">My Messages</a>
-            {' '}
-            page to see the authentication process in action.
+Once you have sent a challenge to the users phone, poll the phone by clicking this button
           </p>
         </div>
         )}
