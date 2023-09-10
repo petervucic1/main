@@ -59,7 +59,7 @@ const Home = () => {
   return (
     <div id="home">
       <div>
-        <Header as="h1">PKCE Flow w/ Okta Hosted Login Page</Header>
+        <Header as="h1">DCJ-ID - Proof of ID</Header>
 
         { authState.isAuthenticated && !userInfo
         && <div>Loading user information...</div>}
@@ -73,16 +73,16 @@ const Home = () => {
             !
           </p>
           <p>
-            You have successfully authenticated against your Okta org, and have been redirected back to this application.  You now have an ID token and access token in local storage.
+            Welcome to the DCJ ID Page.
             Visit the
             {' '}
             <a href="/profile">My Profile</a>
             {' '}
             page to take a look inside the ID token.
           </p>
-          <h3>Next Steps</h3>
-          <p>Currently this application is a stand-alone front end application.  At this point you can use the access token to authenticate yourself against resource servers that you control.</p>
-          <p>This sample is designed to work with one of our resource server examples.  To see access token authentication in action, please download one of these resource server examples:</p>
+          <h3>Search for user</h3>
+          <p>Please enter a users email address in the search box</p>
+          <p>Then click the push okta verify button to push an okta verify challenge to a users phone  To see access token authentication in action, please download one of these resource server examples:</p>
           <ul>
             {resourceServerExamples.map((example) => <li key={example.url}><a href={example.url}>{example.label}</a></li>)}
           </ul>
@@ -99,9 +99,9 @@ const Home = () => {
         {!authState.isAuthenticated
         && (
         <div>
-          <p>If you&lsquo;re viewing this page then you have successfully started this React application.</p>
+          <p>You are about to access the DCJ-ID home page.</p>
           <p>
-            <span>This example shows you how to use the </span>
+            <span>To confirm access please click the login button </span>
             <a href="https://github.com/okta/okta-react/tree/master">Okta React Library</a>
             <span> to add the </span>
             <a href="https://developer.okta.com/docs/guides/implement-auth-code-pkce">PKCE Flow</a>
