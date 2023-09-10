@@ -37,15 +37,15 @@ const Home = () => {
 
   const resourceServerExamples = [
     {
-      label: 'Node/Express Resource Server Example',
+      label: 'Node/Express Resource Server Example!!',
       url: 'https://github.com/okta/samples-nodejs-express-4/tree/master/resource-server',
     },
     {
-      label: 'Java/Spring MVC Resource Server Example',
+      label: 'Java/Spring MVC Resource Server Example!!',
       url: 'https://github.com/okta/samples-java-spring/tree/master/resource-server',
     },
     {
-      label: 'ASP.NET Core Resource Server Example',
+      label: 'ASP.NET Core Resource Server Example!!',
       url: 'https://github.com/okta/samples-aspnetcore/tree/master/samples-aspnetcore-3x/resource-server',
     },
   ];
