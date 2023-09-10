@@ -49,7 +49,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
           <Menu.Item header>
             <Image size="mini" src={logo} />
             &nbsp;
-            <Link to="/">Okta-React Sample Project</Link>
+            <Link to="/">DCJ-ID Admin Console</Link>
           </Menu.Item>
           {authState.isAuthenticated && (
           <Menu.Item id="messages-button">
