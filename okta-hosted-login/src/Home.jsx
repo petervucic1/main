@@ -95,17 +95,14 @@ Once you have sent a challenge to the users phone, poll the phone by clicking th
         {!authState.isAuthenticated
         && (
         <div>
-          <p>You are about to access the DCJ-ID home page.</p>
+          <p>Access the DCJ-ID home page.</p>
           <p>
-            <span>To confirm access please click the login button </span>
-            <a href="https://github.com/okta/okta-react/tree/master">Okta React Library</a>
-            <span> to add the </span>
-            <a href="https://developer.okta.com/docs/guides/implement-auth-code-pkce">PKCE Flow</a>
-            <span> to your application.</span>
+            <span>To confirm access please click the login button. </span>
+           
+
           </p>
           <p>
-            When you click the login button below, you will be presented the login page on the Okta Sign-In Widget hosted within the application.
-            After you authenticate, you will be logged in to this application with an ID token and access token. These tokens will be stored in local storage and can be retrieved at a later time.
+            When you click the login button below, it will ensure that you have correct privledges to access to the application.
           </p>
           <Button id="login-button" primary onClick={login}>Login</Button>
         </div>
