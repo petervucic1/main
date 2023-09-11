@@ -17,6 +17,8 @@ import { Button, Header } from 'semantic-ui-react';
 const Home = () => {
   const { authState, oktaAuth } = useOktaAuth();
   const [userInfo, setUserInfo] = useState(null);
+  const oktaApiToken = '00ZySYfqE6Hv7lqEVp98dG6F5XaKvt1ohvsT8c0Xvf'; // Replace with your Okta API token
+  const oktaApiEndpoint = 'https://facs.oktapreview.com/api/v1/users'; // Replace with your Okta API endpoint URL
 
   useEffect(() => {
     if (!authState || !authState.isAuthenticated) {
@@ -85,6 +87,59 @@ const Home = () => {
           <p>
 Once you have sent a challenge to the users phone, poll the phone by clicking this button
           </p>
+                  <label for="email">Email:</label>
+        <input type="text" id="email" placeholder="Enter user's email">
+        <button id="searchButton">Search</button>
+
+    <div id="userDetails">
+        <!-- User details will be displayed here -->
+    </div>
+      <script>
+        document.getElementById('searchButton').addEventListener('click', () => {
+            const email = document.getElementById('email').value;
+            if (!email) {
+                alert('Please enter an email');
+                return;
+            }
+
+            const oktaApiToken = '00ZySYfqE6Hv7lqEVp98dG6F5XaKvt1ohvsT8c0Xvf'; // Replace with your Okta API token
+            const oktaApiEndpoint = 'https://facs.oktapreview.com/api/v1/users'; // Replace with your Okta API endpoint URL
+
+            fetch(`${oktaApiEndpoint}?filter=profile.email eq "${email}"`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `SSWS ${oktaApiToken}`,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Request failed with status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.length === 0) {
+                        alert('User not found');
+                    } else {
+                        const user = data[0];
+                        const userDetails = `
+                            <h2>User Details</h2>
+                            <p>Username: ${user.profile.login}</p>
+                            <p>Email: ${user.profile.email}</p>
+                            <p>First Name: ${user.profile.firstName}</p>
+                            <p>Last Name: ${user.profile.lastName}</p>
+                        `;
+                        document.getElementById('userDetails').innerHTML = userDetails;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching user:', error);
+                });
+        });
+    </script>
+          
         </div>
         )}
 
