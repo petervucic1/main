@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okta API Call</title>
+</head>
+<body>
+    <h1>Okta API Call</h1>
+    <button id="fetchData">Fetch Data from Okta</button>
+    <div id="responseContainer">
+        <!-- Response data will be displayed here -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('fetchData').addEventListener('click', () => {
+            const oktaApiEndpoint = 'https://facs.oktapreview.okta.com/api/v1/users/me'; // Replace with your Okta API endpoint URL
+            const oktaApiToken = '00ZySYfqE6Hv7lqEVp98dG6F5XaKvt1ohvsT8c0Xvf'; // Replace with your Okta API token
+
+            const headers = {
+                'Authorization': `SSWS ${oktaApiToken}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            };
+
+            axios.get(oktaApiEndpoint, { headers })
+                .then(response => {
+                    const responseContainer = document.getElementById('responseContainer');
+                    responseContainer.innerHTML = `<h2>Response Data:</h2><pre>${JSON.stringify(response.data, null, 2)}</pre>`;
+                })
+                .catch(error => {
+                    const responseContainer = document.getElementById('responseContainer');
+                    responseContainer.innerHTML = `<h2>Error:</h2><pre>${JSON.stringify(error, null, 2)}</pre>`;
+                });
+        });
+    </script>
+</body>
+</html>
