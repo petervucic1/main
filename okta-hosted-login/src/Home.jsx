@@ -89,7 +89,11 @@ Once you have sent a challenge to the users phone, poll the phone by clicking th
           </p>
 
 
-
+    <div>
+        <label for="email">Email:</label>
+        <input type="text" id="email" placeholder="Enter user's email">
+        <button id="searchButton">Search</button>
+    </div>
      
           
         </div>
