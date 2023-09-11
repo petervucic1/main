@@ -79,15 +79,17 @@ const Home = () => {
 
           </p>
           <h3>Search for user</h3>
-          <p>Please enter a users email address in the search box</p>
-          <p>Then click the push okta verify button to push an okta verify challenge to a users phone :</p>
+          <p>Please enter a users email address by clicking search button</p>
+           <Button id="search-button" primary onClick={login}>Search User</Button>
+          <p>Click Verify button to send a challenge to user :</p>
+          <Button id="challenge-button" primary onClick={login}>Trigger Challenge</Button>
           <ul>
             
           </ul>
           <p>
 Once you have sent a challenge to the users phone, poll the phone by clicking this button
           </p>
-
+<Button id="poll-button" primary onClick={login}>Poll Response</Button>
  <h3>Okta User Lookup</h3>
 
      
