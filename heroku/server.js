@@ -14,7 +14,7 @@ app.use('*', (req, res) => {
   if (req.originalUrl.startsWith('/okta-hosted-login')) {
     res.sendFile(path.resolve(__dirname, '..', 'okta-hosted-login', 'dist', 'index.html'));
   } else if (req.originalUrl.startsWith('/custom-login')) {
-    res.sendFile(path.resolve(__dirname, '..', 'custom-login', 'dist', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '..', 'custom-login', 'dist', '888.html'));
   } else if (req.originalUrl === '/') {
     res.sendFile(path.resolve(__dirname, 'index.html'));
   } else {
