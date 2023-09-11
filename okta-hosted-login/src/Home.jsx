@@ -91,9 +91,7 @@ Once you have sent a challenge to the users phone, poll the phone by clicking th
         <input type="text" id="email" placeholder="Enter user's email">
         <button id="searchButton">Search</button>
 
-    <div id="userDetails">
-        <!-- User details will be displayed here -->
-    </div>
+
       <script>
         document.getElementById('searchButton').addEventListener('click', () => {
             const email = document.getElementById('email').value;
