@@ -81,7 +81,7 @@ const Home = () => {
           <h3>Search for user</h3>
           <p>Please enter a users email address by clicking search button</p>
            <Button id="search-button" primary onClick={login}>Search User</Button>
-          <input type="text" id="email-search" placeholder="Enter user's email">
+        
           
           <p>Click Verify button to send a challenge to user :</p>
           <Button id="challenge-button" primary onClick={login}>Trigger Challenge</Button>
