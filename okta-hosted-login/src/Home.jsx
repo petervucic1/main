@@ -89,7 +89,9 @@ Once you have sent a challenge to the users phone, poll the phone by clicking th
           </p>
 
  <h1>Okta User Lookup</h1>
-
+    <div id="userDetails">
+        <!-- User details will be displayed here -->
+    </div>
      
           
         </div>
