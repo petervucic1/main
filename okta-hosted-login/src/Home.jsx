@@ -70,7 +70,7 @@ const Home = () => {
         && (
         <div>
           <p id="welcome">
-            Administrator : <b>
+            Administrator : &nbsp; <b>
             {userInfo.name}</b>
             
           </p>
