@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Okta User Factors and Okta Verify Info</title>
+</head>
+<body>
+  <h1>User Factors and Okta Verify Info</h1>
+  <form id="userFactorsForm">
+    <label for="username">Enter User's Email or Username:</label>
+    <input type="text" id="username" name="username" required>
+    <button type="submit">Get User Info</button>
+  </form>
+  <div id="userInfo">
+    <!-- User information will be displayed here -->
+  </div>
+
+  <script>
+    const apiKey = '00ZySYfqE6Hv7lqEVp98dG6F5XaKvt1ohvsT8c0Xvf';
+
+    document.getElementById('userFactorsForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      getUserInfo(username);
+    });
+
+    function getUserInfo(username) {
+      fetch(`https://your-okta-domain.okta.com/api/v1/users/${username}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `SSWS ${apiKey}`,
+          'Accept': 'application/json',
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        const userInfo = document.getElementById('userInfo');
+        userInfo.innerHTML = '';
+
+        if (data.errorCode) {
+          userInfo.innerHTML = `<p>Error: ${data.errorSummary}</p>`;
+        } else {
+          userInfo.innerHTML = '<h2>User Information:</h2>';
+          userInfo.innerHTML += `<p>First Name: ${data.profile.firstName}</p>`;
+          userInfo.innerHTML += `<p>Last Name: ${data.profile.lastName}</p>`;
+          userInfo.innerHTML += `<p>Okta User ID: ${data.id}</p>`;
+
+          // Get factors
+          fetch(`https://facs.oktapreview.com/api/v1/users/${data.id}/factors`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `SSWS ${apiKey}`,
+              'Accept': 'application/json',
+            }
+          })
+          .then(response => response.json())
+          .then(factors => {
+            userInfo.innerHTML += '<h2>User Factors:</h2>';
+
+            factors.forEach(factor => {
+              userInfo.innerHTML += `<p>Factor Type: ${factor.factorType}</p>`;
+              userInfo.innerHTML += `<p>Factor ID: ${factor.id}</p>`;
+              userInfo.innerHTML += `<p>Status: ${factor.status}</p>`;
+
+              if (factor.provider === 'OKTA' && factor.factorType === 'token:software:totp') {
+                userInfo.innerHTML += '<p>Okta Verify is registered.</p>';
+
+                // Get Okta Verify information
+                fetch(`https://facs.oktapreview.com/api/v1/users/${data.id}/factors/${factor.id}`, {
+                  method: 'GET',
+                  headers: {
+                    'Authorization': `SSWS ${apiKey}`,
+                    'Accept': 'application/json',
+                  }
+                })
+                .then(response => response.json())
+                .then(oktaVerifyInfo => {
+                  userInfo.innerHTML += '<h2>Okta Verify Info:</h2>';
+                  userInfo.innerHTML += `<p>Device Type: ${oktaVerifyInfo.profile.deviceType}</p>`;
+                  userInfo.innerHTML += `<p>Device Name: ${oktaVerifyInfo.profile.deviceName}</p>`;
+                  userInfo.innerHTML += `<p>Device Platform: ${oktaVerifyInfo.profile.devicePlatform}</p>`;
+                  userInfo.innerHTML += `<p>Device ID: ${oktaVerifyInfo.profile.deviceId}</p>`;
+                })
+                .catch(error => {
+                  console.error('Error fetching Okta Verify info:', error);
+                });
+              }
+            });
+          })
+          .catch(error => {
+            console.error('Error fetching user factors:', error);
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching user information:', error);
+      });
+    }
+  </script>
+</body>
+</html>
