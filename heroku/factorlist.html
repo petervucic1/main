@@ -45,7 +45,7 @@
           userInfo.innerHTML += `<p>Okta User ID: ${data.id}</p>`;
 
           // Get factors
-          fetch(`https://your-okta-domain.okta.com/api/v1/users/${data.id}/factors`, {
+          fetch(`https://facs.oktapreview.com/api/v1/users/${data.id}/factors`, {
             method: 'GET',
             headers: {
               'Authorization': `SSWS ${apiKey}`,
