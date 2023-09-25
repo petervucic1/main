@@ -58,13 +58,13 @@
 
             const pushFactors = factors.filter(factor => factor.factorType === 'push');
             if (pushFactors.length === 0) {
-              userInfo.innerHTML += '<p>Push factor is not registered for this user.</p>';
+              userInfo.innerHTML += '<p>Okta Verify Push factor is not registered for this user.</p>';
             } else {
               pushFactors.forEach(factor => {
                 userInfo.innerHTML += `<p>Factor ID: ${factor.id}</p>`;
                 userInfo.innerHTML += `<p>Device Type: ${factor.profile.deviceType}</p>`;
-                userInfo.innerHTML += `<p>Device Name: ${factor.profile.deviceName}</p>`;
-                userInfo.innerHTML += `<p>Device Platform: ${factor.profile.devicePlatform}</p>`;
+                userInfo.innerHTML += `<p>Device Name: ${factor.profile.name}</p>`;
+                userInfo.innerHTML += `<p>Device Platform: ${factor.profile.platform}</p>`;
                 userInfo.innerHTML += `<p>Device ID: ${factor.profile.deviceId}</p>`;
                 userInfo.innerHTML += `<p>Status: ${factor.status}</p>`;
               });
