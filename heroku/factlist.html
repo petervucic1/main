@@ -24,7 +24,7 @@
     });
 
     function getUserInfo(username) {
-      fetch(`https://your-okta-domain.okta.com/api/v1/users/${username}`, {
+      fetch(`https://facs.oktapreview.com/api/v1/users/${username}`, {
         method: 'GET',
         headers: {
           'Authorization': `SSWS ${apiKey}`,
