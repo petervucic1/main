@@ -45,9 +45,9 @@
         const credentialInfo = document.getElementById('credentialInfo');
         credentialInfo.innerHTML = '';
 
-        credentialInfo.innerHTML += `<p>Credential ID: ${data.id}</p>`;
-        credentialInfo.innerHTML += `<p>Device Type: ${data.deviceType}</p>`;
-        credentialInfo.innerHTML += `<p>Factor Result: ${data.status}</p>`;
+        credentialInfo.innerHTML += `<p>Credential ID: ${profile.credentialId}</p>`;
+        credentialInfo.innerHTML += `<p>Device Type: ${profile.deviceType}</p>`;
+        credentialInfo.innerHTML += `<p>Factor Result: ${data.factorResult}</p>`;
       })
       .catch(error => {
         console.error('Error fetching credential information:', error);
