@@ -63,6 +63,18 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
             </Menu.Item>
           )}
           {authState.isAuthenticated && (
+            <Menu.Item id="search-user">
+              <Link to="/search">Search User</Link>
+            </Menu.Item>
+          )}
+
+          {authState.isAuthenticated && (
+            <Menu.Item id="trigger-user">
+              <Link to="/trigger">Trigger Challenge</Link>
+            </Menu.Item>
+          )}
+          
+          {authState.isAuthenticated && (
             <Menu.Item id="logout-button" onClick={logout}>Logout</Menu.Item>
           )}
           {!authState.isPending && !authState.isAuthenticated && (
