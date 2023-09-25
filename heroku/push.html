@@ -1,4 +1,4 @@
-s<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Send Push Challenge</title>
@@ -24,7 +24,7 @@ s<!DOCTYPE html>
     });
 
     function sendPushChallenge(username) {
-      fetch(`https://facs.oktapreview.com/api/v1/users/${username}/factors/opf1cad20u6elOfcs0h8/verify`, {
+      fetch(`https://facs.oktapreview.com/api/v1/users/00u1cadipuwsaXGKA0h8/factors/opf1cad20u6elOfcs0h8/verify`, {
         method: 'POST',
         headers: {
           'Authorization': `SSWS ${apiKey}`,
