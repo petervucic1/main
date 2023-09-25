@@ -1,39 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Okta API Call</title>
+  <title>Okta Profile</title>
 </head>
 <body>
-    <h1>Okta API Call</h1>
-    <button id="fetchData">Fetch Data from Okta</button>
-    <div id="responseContainer">
-        <!-- Response data will be displayed here -->
-    </div>
+  <h1>User Profile</h1>
+  <div id="profile">
+    <!-- User profile information will be displayed here -->
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        document.getElementById('fetchData').addEventListener('click', () => {
-            const oktaApiEndpoint = 'https://facs.oktapreview.okta.com/api/v1/users/me'; // Replace with your Okta API endpoint URL
-            const oktaApiToken = '00ZySYfqE6Hv7lqEVp98dG6F5XaKvt1ohvsT8c0Xvf'; // Replace with your Okta API token
+  <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/5.2.2/okta-auth-js.min.js"></script>
+  <script>
+    const oktaDomain = 'https://facs.oktapreview.okta.com';
+    const clientId = '0oa1tkk2zt4xqrkPn0h8';
+    const redirectUri = window.location.origin;
 
-            const headers = {
-                'Authorization': `SSWS ${oktaApiToken}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            };
+    const config = {
+      issuer: `https://${oktaDomain}/oauth2/default`,
+      clientId: clientId,
+      redirectUri: redirectUri,
+    };
 
-            axios.get(oktaApiEndpoint, { headers })
-                .then(response => {
-                    const responseContainer = document.getElementById('responseContainer');
-                    responseContainer.innerHTML = `<h2>Response Data:</h2><pre>${JSON.stringify(response.data, null, 2)}</pre>`;
-                })
-                .catch(error => {
-                    const responseContainer = document.getElementById('responseContainer');
-                    responseContainer.innerHTML = `<h2>Error:</h2><pre>${JSON.stringify(error, null, 2)}</pre>`;
-                });
-        });
-    </script>
+    const authClient = new OktaAuth(config);
+
+    authClient.tokenManager.get('accessToken')
+      .then(token => {
+        if (token) {
+          // Use the access token to fetch user profile
+          return authClient.token.getUserInfo(token);
+        } else {
+          throw new Error('Access token not found.');
+        }
+      })
+      .then(profile => {
+        const profileDiv = document.getElementById('profile');
+        profileDiv.innerHTML = `
+          <p>Name: ${profile.name}</p>
+          <p>Email: ${profile.email}</p>
+          <!-- Add more user profile information here -->
+        `;
+      })
+      .catch(error => {
+        console.error('Error fetching user profile:', error);
+      });
+  </script>
 </body>
 </html>
