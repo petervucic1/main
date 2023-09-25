@@ -64,7 +64,7 @@ const Navbar = ({ setCorsErrorModalOpen }) => {
           )}
           {authState.isAuthenticated && (
             <Menu.Item id="search-user">
-              <Link to="/search">Search User</Link>
+              <Link to="/searchuser">Search User</Link>
             </Menu.Item>
           )}
 
