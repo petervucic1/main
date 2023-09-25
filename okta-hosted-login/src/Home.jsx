@@ -70,8 +70,8 @@ const Home = () => {
         && (
         <div>
           <p id="welcome">
-            Administrator : 
-            {userInfo.name}
+            Administrator : <b>
+            {userInfo.name}</b>
             
           </p>
           <p>
