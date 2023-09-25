@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Okta User Factors</title>
+</head>
+<body>
+  <h1>User Factors and Okta Verify</h1>
+  <form id="userFactorsForm">
+    <label for="username">Enter User's Email or Username:</label>
+    <input type="text" id="username" name="username" required>
+    <button type="submit">Get Factors</button>
+  </form>
+  <div id="factorsList">
+    <!-- User factors and Okta Verify status will be displayed here -->
+  </div>
+
+  <script>
+    const apiKey = 'your-okta-api-token';
+
+    document.getElementById('userFactorsForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      getUserFactors(username);
+    });
+
+    function getUserFactors(username) {
+      fetch(`https://your-okta-domain.okta.com/api/v1/users/${username}/factors`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `SSWS ${apiKey}`,
+          'Accept': 'application/json',
+        }
+      })
+      .then(response => response.json())
+      .then(factors => {
+        const factorsList = document.getElementById('factorsList');
+        factorsList.innerHTML = '';
+
+        if (factors.length > 0) {
+          factorsList.innerHTML = '<h2>User Factors:</h2>';
+          factors.forEach(factor => {
+            factorsList.innerHTML += `<p>${factor.provider}: ${factor.status}</p>`;
+          });
+
+          // Check if Okta Verify is registered
+          const oktaVerify = factors.find(factor => factor.provider === 'OKTA' && factor.factorType === 'token:software:totp');
+          if (oktaVerify) {
+            factorsList.innerHTML += '<p>Okta Verify is registered.</p>';
+          } else {
+            factorsList.innerHTML += '<p>Okta Verify is not registered.</p>';
+          }
+        } else {
+          factorsList.innerHTML = '<p>User not found or has no factors.</p>';
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching user factors:', error);
+      });
+    }
+  </script>
+</body>
+</html>
