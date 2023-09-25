@@ -1,4 +1,4 @@
-/*
+h/*
  * Copyright (c) 2018-Present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
@@ -66,7 +66,7 @@ const App = () => {
           <Route path="/login/callback" component={LoginCallback} />
           <SecureRoute path="/messages" component={Messages} />
           <SecureRoute path="/profile" component={Profile} />
-          <SecureRoute path="/searchuser" component={Profile} />
+          <SecureRoute path="/searchuser" component={searchuser} />
         </Switch>
       </Container>
     </Security>
