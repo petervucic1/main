@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Okta Push Factor Information</title>
+</head>
+<body>
+  <h1>Okta Push Factor Information</h1>
+  <form id="userInfoForm">
+    <label for="username">Enter User's Email or Username:</label>
+    <input type="text" id="username" name="username" required>
+    <button type="submit">Get User Info and Factors</button>
+  </form>
+  <div id="userInfo">
+    <!-- User information and Push Factor details will be displayed here -->
+  </div>
+
+  <script>
+    document.getElementById('userInfoForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+
+      // Send the username to your server-side code using a Fetch request.
+      // Replace '/your-server-endpoint' with the actual endpoint on your server.
+      fetch('/your-server-endpoint', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: username }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        const userInfo = document.getElementById('userInfo');
+        userInfo.innerHTML = '';
+
+        if (data.error) {
+          userInfo.innerHTML = `<p>Error: ${data.error}</p>`;
+        } else {
+          userInfo.innerHTML += `<p>First Name: ${data.firstName}</p>`;
+          userInfo.innerHTML += `<p>Last Name: ${data.lastName}</p>`;
+          userInfo.innerHTML += `<p>Okta User ID: ${data.userId}</p>`;
+
+          if (data.pushFactors.length > 0) {
+            userInfo.innerHTML += '<h2>Push Factors:</h2>';
+            data.pushFactors.forEach(factor => {
+              userInfo.innerHTML += `<p>Factor ID: ${factor.id}</p>`;
+              userInfo.innerHTML += `<p>Device Type: ${factor.deviceType}</p>`;
+              userInfo.innerHTML += `<p>Device Name: ${factor.name}</p>`;
+              userInfo.innerHTML += `<p>Device Platform: ${factor.platform}</p>`;
+              userInfo.innerHTML += `<p>Device ID: ${factor.deviceId}</p>`;
+              userInfo.innerHTML += `<button onclick="sendPushChallenge('${data.userId}', '${factor.id}')">Send Push Challenge</button>`;
+            });
+          } else {
+            userInfo.innerHTML += '<p>No Push Factors registered for this user.</p>';
+          }
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching user information:', error);
+      });
+    });
+
+    function sendPushChallenge(username, factorId) {
+      // Send the username (Okta User ID) and factor ID to your server-side code
+      // to initiate the push challenge using Okta's API.
+      // You'll need to implement this functionality on the server side.
+      // The server-side code will securely interact with Okta's API to send the push challenge.
+    }
+  </script>
+</body>
+</html>
 
