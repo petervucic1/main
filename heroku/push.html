@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Send Push Challenge</title>
+</head>
+<body>
+  <h1>Send Push Challenge to User</h1>
+  <form id="pushChallengeForm">
+    <label for="username">Enter User's Email or Username:</label>
+    <input type="text" id="username" name="username" required>
+    <button type="submit">Send Push Challenge</button>
+  </form>
+  <div id="challengeStatus">
+    <!-- Challenge status will be displayed here -->
+  </div>
+
+  <script>
+    const apiKey = 'your-okta-api-token';
+
+    document.getElementById('pushChallengeForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      sendPushChallenge(username);
+    });
+
+    function sendPushChallenge(username) {
+      fetch(`https://your-okta-domain.okta.com/api/v1/authn/flows`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `SSWS ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          factorType: 'push',
+          relayState: '/success', // URL to redirect to after the challenge is completed
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        const challengeStatus = document.getElementById('challengeStatus');
+        challengeStatus.innerHTML = '';
+
+        if (data.status === 'MFA_CHALLENGE') {
+          // Challenge has been sent
+          challengeStatus.innerHTML = '<p>Push challenge sent. Check your device.</p>';
+        } else {
+          challengeStatus.innerHTML = '<p>Failed to send push challenge.</p>';
+        }
+      })
+      .catch(error => {
+        console.error('Error sending push challenge:', error);
+      });
+    }
+  </script>
+</body>
+</html>
