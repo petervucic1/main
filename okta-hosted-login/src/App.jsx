@@ -17,7 +17,7 @@ import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
 import { Container } from 'semantic-ui-react';
 import config from './config';
 import Home from './Home';
-import searchuser from './searchuser';
+//import searchuser from './searchuser';
 import Messages from './Messages';
 import Navbar from './Navbar';
 import Profile from './Profile';
@@ -66,7 +66,7 @@ const App = () => {
           <Route path="/login/callback" component={LoginCallback} />
           <SecureRoute path="/messages" component={Messages} />
           <SecureRoute path="/profile" component={Profile} />
-          <SecureRoute path="/searchuser" component={searchuser} />
+      
         </Switch>
       </Container>
     </Security>
