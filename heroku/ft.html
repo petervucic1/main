@@ -66,7 +66,7 @@
                 userInfo.innerHTML += `<p><b>Device Name:</b> ${factor.profile.name}</p>`;
                 userInfo.innerHTML += `<p><b>Device Platform:</b> ${factor.profile.platform}</p>`;
                 userInfo.innerHTML += `<p><b>Status:</b> ${factor.status}</p>`;
-                userInfo.innerHTML += `<p><b>URL Call:</b> ${factor.verify.href}</b></p>`;
+                userInfo.innerHTML += `<p><b>URL Call:</b> ${factor._links.verify.href}</b></p>`;
           
                 userInfo.innerHTML += `<p>User has an active Okta verify registration</p>`;
               });
