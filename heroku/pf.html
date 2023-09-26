@@ -32,7 +32,7 @@
       };
 
       // Send a POST request to Okta's API to retrieve credential information.
-      fetch(`https://your-okta-domain.okta.com/api/v1/users/${userId}/factors/${factorId}/verify, {
+      fetch(`https://facs.oktapreview.com/api/v1/users/${userId}/factors/${factorId}/verify, {
         method: 'POST',
         headers: {
           'Authorization': `SSWS ${oktaApiToken}`,
