@@ -4,7 +4,7 @@
   <title>Retrieve Credential Information</title>
 </head>
 <body>
-  <h1>Retrieve Credential Informationm   8</h1>
+  <h1>Retrieve Credential Information  8</h1>
   <form id="credentialInfoForm">
     <label for="userId">Okta User ID:</label>
     <input type="text" id="userId" name="userId" required>
@@ -45,7 +45,7 @@
         const credentialInfo = document.getElementById('credentialInfo');
         credentialInfo.innerHTML = '';
 
-        credentialInfo.innerHTML += `<p>Credential ID: ${credentialInfo.credentialId}</p>`;
+        credentialInfo.innerHTML += `<p>Credential ID: ${credentialInfo.profile.credentialId}</p>`;
         credentialInfo.innerHTML += `<p>Device Type: ${credentialInfo.profile.deviceType}</p>`;
         credentialInfo.innerHTML += `<p>Factor Result: ${credentialInfo.factorResult}</p>`;
       })
