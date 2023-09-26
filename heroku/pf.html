@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Retrieve Credential Information</title>
+</head>
+<body>
+  <h1>Retrieve Credential Information</h1>
+  <form id="credentialInfoForm">
+    <label for="userId">Okta User ID:</label>
+    <input type="text" id="userId" name="userId" required>
+    <label for="factorId">Factor ID:</label>
+    <input type="text" id="factorId" name="factorId" required>
+    <button type="submit">Get Credential Info</button>
+  </form>
+  <div id="credentialInfo">
+    <!-- Credential information will be displayed here -->
+  </div>
+
+  <script>
+    document.getElementById('credentialInfoForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const userId = document.getElementById('userId').value;
+      const factorId = document.getElementById('factorId').value;
+
+      // Replace 'your-okta-api-token' with your actual Okta API token.
+      const oktaApiToken = '00ZySYfqE6Hv7lqEVp98dG6F5XaKvt1ohvsT8c0Xvf';
+
+      // Define the request body as an object.
+      const requestBody = {
+        userId: userId,
+        factorId: factorId,
+      };
+
+      // Send a POST request to Okta's API to retrieve credential information.
+      fetch(`https://your-okta-domain.okta.com/api/v1/users/${userId}/factors/${factorId}/verify, {
+        method: 'POST',
+        headers: {
+          'Authorization': `SSWS ${oktaApiToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      })
+      .then(response => response.json())
+      .then(data => {
+        const credentialInfo = document.getElementById('credentialInfo');
+        credentialInfo.innerHTML = '';
+
+        credentialInfo.innerHTML += `<p>Credential ID: ${data.id}</p>`;
+        credentialInfo.innerHTML += `<p>Device Type: ${data.deviceType}</p>`;
+        credentialInfo.innerHTML += `<p>Factor Result: ${data.status}</p>`;
+      })
+      .catch(error => {
+        console.error('Error fetching credential information:', error);
+      });
+    });
+  </script>
+</body>
+</html>
