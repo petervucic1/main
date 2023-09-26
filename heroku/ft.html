@@ -40,9 +40,9 @@
           userInfo.innerHTML = `<p>Error: ${data.errorSummary}</p>`;
         } else {
           userInfo.innerHTML = '<h2>User Information:</h2>';
-          userInfo.innerHTML += `<p>First Name: ${data.profile.firstName}</p>`;
-          userInfo.innerHTML += `<p>Last Name: ${data.profile.lastName}</p>`;
-          userInfo.innerHTML += `<p>Okta User ID: ${data.id}</p>`;
+          userInfo.innerHTML += `<p><b>First Name:</b> ${data.profile.firstName}</p>`;
+          userInfo.innerHTML += `<p><b>Last Name:</b> ${data.profile.lastName}</p>`;
+          userInfo.innerHTML += `<p><b>Okta User ID:</b> ${data.id}</p>`;
 
           // Get factors
           fetch(`https://facs.oktapreview.com/api/v1/users/${data.id}/factors`, {
@@ -61,11 +61,13 @@
               userInfo.innerHTML += '<p>Okta Verify Push factor is not registered for this user.</p>';
             } else {
               pushFactors.forEach(factor => {
-                userInfo.innerHTML += `<p>Factor ID: ${factor.id}</p>`;
-                userInfo.innerHTML += `<p>Device Type: ${factor.profile.deviceType}</p>`;
-                userInfo.innerHTML += `<p>Device Name: ${factor.profile.name}</p>`;
-                userInfo.innerHTML += `<p>Device Platform: ${factor.profile.platform}</p>`;
-                userInfo.innerHTML += `<p><b>Status: ${factor.status}</b></p>`;
+                userInfo.innerHTML += `<p><b>Factor ID:</b> ${factor.id}</p>`;
+                userInfo.innerHTML += `<p><b>Device Type:</b> ${factor.profile.deviceType}</p>`;
+                userInfo.innerHTML += `<p><b>Device Name:</b> ${factor.profile.name}</p>`;
+                userInfo.innerHTML += `<p><b>Device Platform:</b> ${factor.profile.platform}</p>`;
+                userInfo.innerHTML += `<p><b>Status:</b> ${factor.status}</p>`;
+                userInfo.innerHTML += `<p><b>URL Call:</b> ${factor.verify.href}</b></p>`;
+          
                 userInfo.innerHTML += `<p>User has an active Okta verify registration</p>`;
               });
             }
