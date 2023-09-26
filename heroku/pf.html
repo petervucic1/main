@@ -47,9 +47,11 @@
 
         credentialInfo.innerHTML += `<p><b>UserName:</b> ${data.profile.credentialId}</p>`;
         credentialInfo.innerHTML += `<p><b>Device:</b> ${data.profile.deviceType}</p>`;
+        credentialInfo.innerHTML += `<p><b>Device name:</b> ${data.profile.name}</p>`;
+        credentialInfo.innerHTML += `<p><b>Device platform:</b> ${data.profile.platform}</p>`;
         credentialInfo.innerHTML += `<p><b>Push Status:</b> ${data.factorResult}</p>`;
         credentialInfo.innerHTML += `<p><b>Poll URL:</b> ${data._links.poll.href}</p>`;
-        credentialInfo.innerHTML += `<p><b>Poll URL:</b> ${data.expiresAt}</p>`;
+        credentialInfo.innerHTML += `<p><b>Push Expiry:</b> ${data.expiresAt}</p>`;
       })
       .catch(error => {
         console.error('Error fetching credential information:', error);
