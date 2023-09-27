@@ -68,11 +68,10 @@
     <label for="username">Enter User's Email or Username:</label>
     <input type="text" id="username" name="username" required>
     <button type="submit">Get Push Factor Info</button>
-  </form>
+  </form><br>
     <form id="credentialInfoForm">
-    <label for="userId">UserID</label>
+    <label for="userId">Push factor</label>
     <input type="text" id="userId" name="userId" required>
-    <label for="factorId">FactorID:</label>
     <input type="text" id="factorId" name="factorId"  required>
     <button type="submit">Push Verify to User</button>
   </form>
@@ -93,8 +92,7 @@
   
  
   <script>
-    document.getElementById('userId').value = ${data.id};
-      document.getElementById('factorId').value = ${factor.id};
+
     const apiKey = '00ZySYfqE6Hv7lqEVp98dG6F5XaKvt1ohvsT8c0Xvf';
 
     document.getElementById('userFactorsForm').addEventListener('submit', function (e) {
