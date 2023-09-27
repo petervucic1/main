@@ -1,4 +1,4 @@
-h/*
+/*
  * Copyright (c) 2018-Present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
@@ -17,6 +17,7 @@ import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
 import { Container } from 'semantic-ui-react';
 import config from './config';
 import Home from './Home';
+
 import Messages from './Messages';
 import Navbar from './Navbar';
 import Profile from './Profile';
@@ -65,7 +66,6 @@ const App = () => {
           <Route path="/login/callback" component={LoginCallback} />
           <SecureRoute path="/messages" component={Messages} />
           <SecureRoute path="/profile" component={Profile} />
-      
         </Switch>
       </Container>
     </Security>
