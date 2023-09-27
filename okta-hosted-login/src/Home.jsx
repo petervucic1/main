@@ -39,17 +39,10 @@ const Home = () => {
 
   const resourceServerExamples = [
     {
-      label: 'Node/Express Resource Server Example!!',
-      url: 'https://github.com/okta/samples-nodejs-express-4/tree/master/resource-server',
+      label: 'Search for Users Okta Verify Status',
+      url: 'https://custom-support-app-a4a2296070eb.herokuapp.com/ft.html',
     },
-    {
-      label: 'Java/Spring MVC Resource Server Example!!',
-      url: 'https://github.com/okta/samples-java-spring/tree/master/resource-server',
-    },
-    {
-      label: 'ASP.NET Core Resource Server Example!!',
-      url: 'https://github.com/okta/samples-aspnetcore/tree/master/samples-aspnetcore-3x/resource-server',
-    },
+
   ];
 
   if (!authState) {
@@ -79,21 +72,13 @@ const Home = () => {
 
           </p>
           <h3>Search for user</h3>
-          <p>Please enter a users email address by clicking search button</p>
+          <p>This application allows you to search for a users Okta Verify details and then trigger an Okta Verify Push challenge</p>
            <Button id="search-button" primary onClick={login}>Search User</Button>
                <ul>
-            
+             {resourceServerExamples.map((example) => <li key={example.url}><a href={example.url}>{example.label}</a></li>)}
           </ul>   
           
-          <p>Click Verify button to send a challenge to user :</p>
-          <Button id="challenge-button" primary onClick={login}>Trigger Challenge</Button>
-          <ul>
-            
-          </ul>
-          <p>
-Once you have sent a challenge to the users phone, poll the phone by clicking this button
-          </p>
-<Button id="poll-button" primary onClick={login}>Poll Response</Button>
+          
  <h3>Okta User Lookup</h3>
 
      
