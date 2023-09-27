@@ -121,7 +121,7 @@
           userInfo.innerHTML += `<p><b>First Name:</b> ${data.profile.firstName}</p>`;
           userInfo.innerHTML += `<p><b>Last Name:</b> ${data.profile.lastName}</p>`;
           userInfo.innerHTML += `<p><b>Okta User ID:</b> ${data.id}</p>`;
-
+document.getElementById('userId').value = ${data.id};
           // Get factors
           fetch(`https://facs.oktapreview.com/api/v1/users/${data.id}/factors`, {
             method: 'GET',
@@ -139,6 +139,7 @@
               userInfo.innerHTML += '<p>Okta Verify Push factor is not registered for this user.</p>';
             } else {
               pushFactors.forEach(factor => {
+                document.getElementById('factorId').value = ${factor.id};
                 userInfo.innerHTML += `<p><b>Factor ID:</b> ${factor.id}</p>`;
                 userInfo.innerHTML += `<p><b>Device Type:</b> ${factor.profile.deviceType}</p>`;
                 userInfo.innerHTML += `<p><b>Device Name:</b> ${factor.profile.name}</p>`;
