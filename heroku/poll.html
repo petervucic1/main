@@ -34,7 +34,12 @@
       .then(response => response.json())
       .then(data => {
         const responseDiv = document.getElementById('response');
-        responseDiv.innerHTML = JSON.stringify(data, null, 2);
+        const currentDate = new Date().toLocaleString();
+
+        // Display factorResult, current date/time, and oktaUrl in separate lines.
+        responseDiv.innerHTML = `<p>Factor Result: ${data.factorResult}</p>`;
+        responseDiv.innerHTML += `<p>Current Date/Time: ${currentDate}</p>`;
+        responseDiv.innerHTML += `<p>Okta API URL: ${oktaUrl}</p>`;
       })
       .catch(error => {
         const responseDiv = document.getElementById('response');
