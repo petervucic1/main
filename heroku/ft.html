@@ -69,6 +69,13 @@
     <input type="text" id="username" name="username" required>
     <button type="submit">Get Push Factor Info</button>
   </form>
+    <form id="credentialInfoForm">
+    <label for="userId">UserID</label>
+    <input type="text" id="userId" name="userId" required>
+    <label for="factorId">FactorID:</label>
+    <input type="text" id="factorId" name="factorId" required>
+    <button type="submit">Push Verify to Phone</button>
+  </form>
   <div id="userInfo">
     <!-- User information and Push Factor details will be displayed here -->
 
@@ -76,14 +83,16 @@
   </div>
 
 
-       <div id="includeHtml"></div> 
+       <div id="credentialInfo">
+
+
+         
+       </div> 
 
   
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>  
+ 
   <script>
-      $(function() {
-         $("#includeHtml").load("pf.html");
-      });
+
     const apiKey = '00ZySYfqE6Hv7lqEVp98dG6F5XaKvt1ohvsT8c0Xvf';
 
     document.getElementById('userFactorsForm').addEventListener('submit', function (e) {
@@ -150,6 +159,46 @@
         console.error('Error fetching user information:', error);
       });
     }
+     document.getElementById('credentialInfoForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const userId = document.getElementById('userId').value;
+      const factorId = document.getElementById('factorId').value;
+
+      // Replace 'your-okta-api-token' with your actual Okta API token.
+      const oktaApiToken = '00ZySYfqE6Hv7lqEVp98dG6F5XaKvt1ohvsT8c0Xvf';
+
+      // Define the request body as an object.
+      const requestBody = {
+        userId: userId,
+        factorId: factorId,
+      };
+
+      // Send a POST request to Okta's API to retrieve credential information.
+      fetch(`https://facs.oktapreview.com/api/v1/users/${userId}/factors/${factorId}/verify`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `SSWS ${oktaApiToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      })
+      .then(response => response.json())
+      .then(data => {
+        const credentialInfo = document.getElementById('credentialInfo');
+        credentialInfo.innerHTML = '';
+
+        credentialInfo.innerHTML += `<p><b>UserName:</b> ${data.profile.credentialId}</p>`;
+        credentialInfo.innerHTML += `<p><b>Device:</b> ${data.profile.deviceType}</p>`;
+        credentialInfo.innerHTML += `<p><b>Device name:</b> ${data.profile.name}</p>`;
+        credentialInfo.innerHTML += `<p><b>Device platform:</b> ${data.profile.platform}</p>`;
+        credentialInfo.innerHTML += `<p><b>Push Status:</b> ${data.factorResult}</p>`;
+        credentialInfo.innerHTML += `<p><b>Poll URL:</b> ${data._links.poll.href}</p>`;
+        credentialInfo.innerHTML += `<p><b>Push Expiry:</b> ${data.expiresAt}</p>`;
+      })
+      .catch(error => {
+        console.error('Error fetching credential information:', error);
+      });
+    });
   </script>
 </body>
 </html>
