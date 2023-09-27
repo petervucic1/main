@@ -225,7 +225,7 @@ document.getElementById('pollUser').addEventListener('submit', function (e) {
 
       // Send a POST request to Okta's API to retrieve credential information.
       fetch(`${pollId}`, {
-        method: 'POST',
+        method: 'GET',
         headers: {
           'Authorization': `SSWS ${oktaApiToken1}`,
           'Content-Type': 'application/json',
