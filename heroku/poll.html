@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Okta Verify Push API</title>
+</head>
+<body>
+  <h1>Okta Verify Push API</h1>
+  <form id="fetchForm">
+    <label for="oktaUrl">Okta API URL:</label>
+    <input type="text" id="oktaUrl" name="oktaUrl" required>
+    <button type="submit">Fetch Data</button>
+  </form>
+  <div id="response">
+    <!-- Response data will be displayed here -->
+  </div>
+
+  <script>
+    document.getElementById('fetchForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const oktaUrl = document.getElementById('oktaUrl').value;
+      
+      // Replace 'your-okta-token' with your actual Okta API token.
+      const oktaApiToken = 'your-okta-api-token';
+
+      // Perform a Fetch request to the Okta API with the provided URL.
+      fetch(oktaUrl, {
+        method: 'GET',
+        headers: {
+          'Authorization': `SSWS ${oktaApiToken}`,
+          'Accept': 'application/json',
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        const responseDiv = document.getElementById('response');
+        responseDiv.innerHTML = JSON.stringify(data, null, 2);
+      })
+      .catch(error => {
+        const responseDiv = document.getElementById('response');
+        responseDiv.innerHTML = `Error: ${error.message}`;
+      });
+    });
+  </script>
+</body>
+</html>
