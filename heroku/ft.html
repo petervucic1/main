@@ -71,21 +71,16 @@
   </form>
     <form id="credentialInfoForm">
     <label for="userId">UserID</label>
-    <input type="text" id="userId" name="userId" value=${userId} required>
+    <input type="text" id="userId" name="userId" required>
     <label for="factorId">FactorID:</label>
-    <input type="text" id="factorId" name="factorId" value=${factorId} required>
+    <input type="text" id="factorId" name="factorId"  required>
     <button type="submit">Push Verify to User</button>
   </form>
+
+  
   <div id="userInfo">
     <!-- User information and Push Factor details will be displayed here -->
 
-<form id="credentialInfoForm">
-    <label for="userId">UserID</label>
-    <input type="text" id="userId" name="userId" value=${userId} required>
-    <label for="factorId">FactorID:</label>
-    <input type="text" id="factorId" name="factorId" value=${factorId} required>
-    <button type="submit">Push Verify to User</button>
-  </form>
   </div>
 
 
@@ -98,7 +93,8 @@
   
  
   <script>
-
+    document.getElementById('userId').value = ${data.id};
+      document.getElementById('factorId').value = ${factor.id};
     const apiKey = '00ZySYfqE6Hv7lqEVp98dG6F5XaKvt1ohvsT8c0Xvf';
 
     document.getElementById('userFactorsForm').addEventListener('submit', function (e) {
