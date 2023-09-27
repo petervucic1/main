@@ -236,7 +236,7 @@ document.getElementById('pollUser').addEventListener('submit', function (e) {
       .then(data => {
         const pollInfo = document.getElementById('pollInfo');
         pollInfo.innerHTML = '';
-
+pollInfo.innerHTML += `<p><b>UserName:</b></p>`;
         pollInfo.innerHTML += `<p><b>UserName:</b> ${data.profile.credentialId}</p>`;
         pollInfo.innerHTML += `<p><b>Device:</b> ${data.profile.deviceType}</p>`;
         pollInfo.innerHTML += `<p><b>Device name:</b> ${data.profile.name}</p>`;
