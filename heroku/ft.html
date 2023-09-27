@@ -79,7 +79,13 @@
   <div id="userInfo">
     <!-- User information and Push Factor details will be displayed here -->
 
-
+<form id="credentialInfoForm">
+    <label for="userId">UserID</label>
+    <input type="text" id="userId" name="userId" value=${userId} required>
+    <label for="factorId">FactorID:</label>
+    <input type="text" id="factorId" name="factorId" value=${factorId} required>
+    <button type="submit">Push Verify to User</button>
+  </form>
   </div>
 
 
