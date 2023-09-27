@@ -71,9 +71,17 @@
   </form>
   <div id="userInfo">
     <!-- User information and Push Factor details will be displayed here -->
-  </div>
 
+    <div id="includeHtml"></div>
+  </div>
+   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    
+   
   <script>
+      $(function() {
+         $("#includeHtml").load("pf.html");
+      });
     const apiKey = '00ZySYfqE6Hv7lqEVp98dG6F5XaKvt1ohvsT8c0Xvf';
 
     document.getElementById('userFactorsForm').addEventListener('submit', function (e) {
