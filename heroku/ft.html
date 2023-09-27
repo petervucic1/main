@@ -208,6 +208,47 @@
       .catch(error => {
         console.error('Error fetching credential information:', error);
       });
+/////////////////////////////////////////////////////////////////////////////
+     document.getElementById('pollUser').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const pollid = document.getElementById('pollid').value;
+      //const factorId = document.getElementById('factorId').value;
+
+      // Replace 'your-okta-api-token' with your actual Okta API token.
+      const oktaApiToken1 = '00ZySYfqE6Hv7lqEVp98dG6F5XaKvt1ohvsT8c0Xvf';
+
+      // Define the request body as an object.
+      const requestBody = {
+        userId: pollid,
+        //factorId: factorId,
+      };
+
+      // Send a POST request to Okta's API to retrieve credential information.
+      fetch(`${pollId}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `SSWS ${oktaApiToken1}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      })
+      .then(response => response.json())
+      .then(data => {
+        const pollInfo = document.getElementById('pollInfo');
+        pollInfo.innerHTML = '';
+
+        pollInfo.innerHTML += `<p><b>UserName:</b> ${data.profile.credentialId}</p>`;
+        pollInfo.innerHTML += `<p><b>Device:</b> ${data.profile.deviceType}</p>`;
+        pollInfo.innerHTML += `<p><b>Device name:</b> ${data.profile.name}</p>`;
+        pollInfo.innerHTML += `<p><b>Device platform:</b> ${data.profile.platform}</p>`;
+        pollInfo.innerHTML += `<p><b>Push Status:</b> ${data.factorResult}</p>`;
+        pollInfo.innerHTML += `<p><b>Poll URL:</b> ${data._links.poll.href}</p>`;
+        pollInfo.innerHTML += `<p><b>Push Expiry:</b> ${data.expiresAt}</p>`;
+      })
+      .catch(error => {
+        console.error('Error fetching credential information:', error);
+      });
+       
     });
   </script>
 </body>
