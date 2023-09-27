@@ -73,7 +73,7 @@ const Home = () => {
           </p>
           <h3>Search for user</h3>
           <p>This application allows you to search for a users Okta Verify details and then trigger an Okta Verify Push challenge</p>
-           <Button id="search-button" primary onClick={login}>Search User</Button>
+         
                <ul>
              {resourceServerExamples.map((example) => <li key={example.url}><a href={example.url}>{example.label}</a></li>)}
           </ul>   
